@@ -1,0 +1,17 @@
+{
+  "name": "be-tp2a_jueves",
+  "version": "1.0.0",
+  "description": "## Programación sincrónica y asincrónica",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "node --watch .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
