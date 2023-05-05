@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "## Programación sincrónica y asincrónica",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node .",
     "dev": "node --watch .",
@@ -12,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
   }
 }
