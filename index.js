@@ -1,24 +1,21 @@
 import express from "express";
 const app = express();
 
-//importaciones
-import morgan from "morgan";
+import router from "./routes/index.js";
+// por si hace falta
+// import connection from "./connection/index.js";
 
-//importaciones
-import routes from "./routes/index.js";
-import logUrlMethod from "./midlewares/logUrlMethod.js"
 
-//midelwares de aplicacion
-// const logUrlMethod = (req, res, next) => {
-//   console.log("Url", req.url);
-//   console.log("Method", req.method);
-//   next();
-// };
-// app.use(logUrlMethod);
-app.use(morgan('tiny'))
-//midelwares
-// app.use(logUrlMethod,routes);
-app.use(routes);
+//midleware
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+
+
+
+app.use("/api", router);
+
+
+//server
 app.listen(8080, () => {
-  console.log("\x1b[42m\x1b[37m%s\x1b[0m", "http://localhost:8080");
+  console.log("puerto ok http://localhost:8080");
 });
