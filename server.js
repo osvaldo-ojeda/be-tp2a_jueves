@@ -1,15 +1,16 @@
 import express from "express";
 import connection from "./connection/connection.js";
 const app = express();
+import { serverPort } from "./config/config.js";
+import routes from "./routes/routes.js";
 
-//momentaneamente
-import User from "./Models/User.js";
-import Product from "./Models/Product.js";
-import Category from "./Models/Category.js";
+
+
+app.use(routes)
 
 
 await connection.sync({ force: false }).then(() => {
-  app.listen(8080, () => {
-    console.log("server ok http://localhost:8080");
+  app.listen(serverPort, () => {
+    console.log(`server ok http://localhost:${serverPort}`);
   });
 });
