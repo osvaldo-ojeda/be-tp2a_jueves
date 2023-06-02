@@ -8,10 +8,16 @@ Product.init(
     name: {
       type: DT.STRING,
       allowNull: false,
+      validate: {
+        len: [1, 100],
+      },
     },
     description: {
       type: DT.STRING,
       allowNull: false,
+      validate: {
+        len: [1, 100],
+      },
     },
     category: {
       type: DT.STRING,
@@ -19,9 +25,9 @@ Product.init(
     },
   },
   {
-    sequelize:connection,
-    modelName:"Product"
+    sequelize: connection,
+    modelName: "Product",
   }
 );
 
-export default Product
+export default Product;

@@ -20,6 +20,9 @@ User.init(
     email: {
       type: DT.STRING,
       allowNull: false,
+      validate: {
+        isEmail: true,
+      },
     },
   },
   {
