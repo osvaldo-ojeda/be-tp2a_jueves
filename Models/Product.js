@@ -19,14 +19,14 @@ Product.init(
         len: [1, 100],
       },
     },
-    category: {
-      type: DT.STRING,
-      allowNull: false,
-    },
+    // categoryId:{
+    //   type:DT.INTEGER
+    // } 
   },
   {
     sequelize: connection,
     modelName: "Product",
+    timestamps:false
   }
 );
 

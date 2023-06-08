@@ -3,14 +3,18 @@ import connection from "./connection/connection.js";
 const app = express();
 import { serverPort } from "./config/config.js";
 import routes from "./routes/routes.js";
+import categorySeed from "./seed/categorySeed.js";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
-await connection.sync({ force: false }).then(() => {
-  app.listen(serverPort, () => {
-    console.log(`server ok http://localhost:${serverPort}`);
-  });
-});
+await connection
+  .sync({ force: false })
+  .then(() => {
+    app.listen(serverPort, () => {
+      console.log(`server ok http://localhost:${serverPort}`);
+    });
+  })
+  .then(() => categorySeed());

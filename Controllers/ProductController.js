@@ -1,11 +1,17 @@
-import Product from "../Models/Product.js";
+import { Product, Category } from "../Models/index.js";
 
 class ProductController {
   constructor() {}
   getAllProduct = async (req, res) => {
     try {
       const result = await Product.findAll({
-        attributes: ["id", "name", "description"],
+        attributes: ["id", "name", "description", "categoryId"],
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+          },
+        ],
       });
       if (result.length === 0) throw new Error("No hay productos");
       res.status(200).send({
@@ -46,8 +52,8 @@ class ProductController {
 
   createProduct = async (req, res) => {
     try {
-      const { name, description, category } = req.body;
-      const result = await Product.create({ name, description, category });
+      const { name, description, categoryId } = req.body;
+      const result = await Product.create({ name, description, categoryId });
       if (!result) throw new Error("No se pudo crear el producto");
       res.status(200).send({
         success: true,
