@@ -7,3 +7,7 @@ export const generarToken = (payload) => {
   });
   return token;
 };
+
+ export const verificarToken=(token)=>{
+      return  jwt.verify(token, secret)
+ }

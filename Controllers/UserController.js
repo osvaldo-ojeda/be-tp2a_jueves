@@ -1,6 +1,5 @@
 import { User } from "../Models/index.js";
-import { generarToken } from "../utils/token.js";
-
+import { generarToken, verificarToken } from "../utils/token.js";
 
 class UserController {
   constructor() {}
@@ -59,14 +58,16 @@ class UserController {
         error.status = 400;
         throw error;
       }
-      
-      const payload={
-        id:result.id,
-        email:result.email
-      }
 
-      generarToken(payload)
-     
+      const payload = {
+        id: result.id,
+        email: result.email,
+        role:"admin"
+      };
+
+      const token = generarToken(payload);
+      // console.log("🚀 ~ file: UserController.js:68 ~ UserController ~ login= ~ token:", token)
+      res.cookie("token", token);
 
       res.status(200).send({
         success: true,
@@ -76,6 +77,23 @@ class UserController {
       next(error);
     }
   };
+
+  me = (req, res, next) => {
+   const {user}=req
+    res.status(200).send({
+      success: true,
+      message: "Usuario ok",
+      result:user
+    });
+  };
+
+  logout=(req, res, next)=>{
+    res.cookie("token", "");
+    res.status(200).send({
+      success: true,
+      message: "Usuario deslogueado",
+    });
+  }
 }
 
 export default UserController;
