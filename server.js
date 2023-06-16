@@ -10,6 +10,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
+app.use((error, req, res, next) => {
+  res
+    .status(error.status || 500)
+    .send({ success: false, message: error.message });
+});
+
+
+
 await connection
   .sync({ force: false })
   .then(() => {

@@ -7,6 +7,7 @@ userRoutes.get("/", userController.getAllUsers)
 userRoutes.get("/:id")
 userRoutes.put("/:id")
 userRoutes.post("/", userController.createUser)
+userRoutes.post("/login", userController.login)
 userRoutes.delete("/:id")
 
 export default userRoutes
