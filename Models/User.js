@@ -41,6 +41,10 @@ User.init(
     salt: {
       type: DT.STRING,
     },
+    role: {
+      type: DT.STRING,
+      defaultValue:"user"
+    },
   },
   {
     sequelize: connection,

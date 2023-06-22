@@ -17,8 +17,26 @@ class UserController {
   };
   createUser = async (req, res, next) => {
     try {
+      // ---------------
+      const user = await User.count({
+        where: {
+          id: 1,
+        },
+      });
+      let role = "user";
+      if (user == 0) {
+        role = "admin";
+      }
+      // ---------------
+
       const { name, lastName, password, email } = req.body;
-      const result = await User.create({ name, lastName, password, email });
+      const result = await User.create({
+        name,
+        lastName,
+        password,
+        email,
+        role,
+      });
       if (!result) {
         const error = new Error("No se pudo crear al usuario");
         error.status = 400;
@@ -62,7 +80,7 @@ class UserController {
       const payload = {
         id: result.id,
         email: result.email,
-        role:"admin"
+        role: result.role,
       };
 
       const token = generarToken(payload);
@@ -79,21 +97,21 @@ class UserController {
   };
 
   me = (req, res, next) => {
-   const {user}=req
+    const { user } = req;
     res.status(200).send({
       success: true,
       message: "Usuario ok",
-      result:user
+      result: user,
     });
   };
 
-  logout=(req, res, next)=>{
+  logout = (req, res, next) => {
     res.cookie("token", "");
     res.status(200).send({
       success: true,
       message: "Usuario deslogueado",
     });
-  }
+  };
 }
 
 export default UserController;
